@@ -29,7 +29,6 @@ namespace DevIO.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ResolveDependencies();
 
             services.AddDbContext<MeuDbContext>(options => 
             {
@@ -39,6 +38,12 @@ namespace DevIO.Api
             services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
+
+            services.Configure<ApiBehaviorOptions>(options => {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
+            services.ResolveDependencies();
 
         }
 
