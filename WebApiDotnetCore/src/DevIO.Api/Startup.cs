@@ -37,18 +37,7 @@ namespace DevIO.Api
 
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddControllers();
-
-            services.Configure<ApiBehaviorOptions>(options => {
-                options.SuppressModelStateInvalidFilter = true;
-            });
-
-            services.AddCors(options => {
-                options.AddPolicy("Development",
-                    builder => builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
-            });
+            services.AddApiConfig();
 
             services.ResolveDependencies();
 
@@ -57,23 +46,7 @@ namespace DevIO.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseCors("Development");
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseApiConfig(env);
         }
     }
 }
