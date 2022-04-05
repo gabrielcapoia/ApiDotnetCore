@@ -35,6 +35,8 @@ namespace DevIO.Api
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddIdentityConfig(Configuration);
+
             services.AddAutoMapper(typeof(Startup));
 
             services.AddApiConfig();
@@ -46,6 +48,7 @@ namespace DevIO.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAuthentication();
             app.UseApiConfig(env);
         }
     }
