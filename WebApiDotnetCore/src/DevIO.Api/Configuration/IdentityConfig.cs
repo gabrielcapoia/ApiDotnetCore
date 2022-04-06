@@ -1,4 +1,5 @@
 ﻿using DevIO.Api.Data;
+using DevIO.Api.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,9 +16,9 @@ namespace DevIO.Api.Configuration
             services.AddDbContext<ApplicationDbContext>(options =>            
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-               //.AddRoles<IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>()               
                .AddEntityFrameworkStores<ApplicationDbContext>()
+               .AddErrorDescriber<IdentityMensagensPortugues>()
                .AddDefaultTokenProviders();
 
             return services;
