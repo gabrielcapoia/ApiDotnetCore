@@ -91,8 +91,7 @@ namespace DevIO.Api.Controllers
             return CustomResponse();
 
         }
-
-        [ClaimsAuthorize("Fornecedor", "Atualizar")]
+                
         [HttpGet("obter-endereco/{id:guid}")]
         public async Task<EnderecoViewModel> ObterEnderecoPorId(Guid id)
         {
