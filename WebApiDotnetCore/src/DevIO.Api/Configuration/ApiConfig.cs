@@ -25,6 +25,14 @@ namespace DevIO.Api.Configuration
                     builder => builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
+
+                options.AddPolicy("Production",
+                    builder => builder
+                    .WithMethods("GET")
+                    .WithOrigins("http://meudomin.io")
+                    .SetIsOriginAllowedToAllowWildcardSubdomains()
+                    //.WithHeaders(HeaderNames.ContentType, "x-custom-header")
+                    .AllowAnyHeader());
             });
 
             return services;
@@ -34,16 +42,16 @@ namespace DevIO.Api.Configuration
         {
             if (env.IsDevelopment())
             {
+                app.UseCors("Development");
                 app.UseDeveloperExceptionPage();
             }
             else
             {
+                app.UseCors("Production");
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
-
-            app.UseCors("Development");
 
             app.UseRouting();
 
