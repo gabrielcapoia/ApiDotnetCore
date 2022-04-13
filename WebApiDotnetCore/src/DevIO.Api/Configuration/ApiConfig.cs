@@ -36,10 +36,14 @@ namespace DevIO.Api.Configuration
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseCors("Development");
+            else
+            {
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("Development");
 
             app.UseRouting();
 
