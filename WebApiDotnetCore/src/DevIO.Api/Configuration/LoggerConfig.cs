@@ -20,6 +20,13 @@ namespace DevIO.Api.Configuration
             });
 
             services.AddHealthChecks()
+                .AddElmahIoPublisher(options =>
+                {
+                    options.ApiKey = "b15427a11eae448f944aafbe57a8702e";
+                    options.LogId = new Guid("1e4bd860-6029-4aca-b919-d66ff61a1061");
+                    options.HeartbeatId = "66c2733653a24b999500a7e8b21b55fc";
+
+                })
                 .AddCheck("Produtos", new SqlServerHealthCheck(configuration.GetConnectionString("DefaultConnection")))
                 .AddSqlServer(configuration.GetConnectionString("DefaultConnection"), name: "BancoSQL");
 
@@ -44,7 +51,8 @@ namespace DevIO.Api.Configuration
         {
             app.UseElmahIo();
 
-            app.UseHealthChecks("/api/hc", new HealthCheckOptions() { 
+            app.UseHealthChecks("/api/hc", new HealthCheckOptions()
+            {
                 Predicate = _ => true,
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
