@@ -24,12 +24,14 @@ namespace DevIO.Api.V2.Controllers
         [HttpGet]
         public string Valor()
         {
-            logger.LogTrace("Log de Trace");
-            logger.LogDebug("Log de Debug");
-            logger.LogInformation("Log de Informação");
-            logger.LogWarning("Log de Aviso");
-            logger.LogError("Log de Erro");
-            logger.LogCritical("Log de Problema Critico");
+            throw new Exception("Error");
+
+            //logger.LogTrace("Log de Trace");
+            //logger.LogDebug("Log de Debug");
+            //logger.LogInformation("Log de Informação");
+            //logger.LogWarning("Log de Aviso");
+            //logger.LogError("Log de Erro");
+            //logger.LogCritical("Log de Problema Critico");
 
             return "Api versão 2.0";
         }

@@ -1,5 +1,6 @@
 using AutoMapper;
 using DevIO.Api.Configuration;
+using DevIO.Api.Extensions;
 using DevIO.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -55,6 +56,7 @@ namespace DevIO.Api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
             app.UseAuthentication();
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseApiConfig(env);
             app.UseSwaggerConfig(provider);
             app.UseLoggingConfiguration();
