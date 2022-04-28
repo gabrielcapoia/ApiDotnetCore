@@ -45,6 +45,8 @@ namespace DevIO.Api
 
             services.AddSwaggerConfig();
 
+            services.AddLoggingConfig(Configuration);
+
             services.ResolveDependencies();
 
         }
@@ -55,6 +57,7 @@ namespace DevIO.Api
             app.UseAuthentication();
             app.UseApiConfig(env);
             app.UseSwaggerConfig(provider);
+            app.UseLoggingConfiguration();
         }
     }
 }
